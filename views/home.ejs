@@ -1,0 +1,47 @@
+<%- include('partials/header'); -%>
+<h1>Home</h1>
+<p><%= homeContent %></p>
+
+<div class="container m-3 p-3">
+  <% if(composePostContent.length==1){ %> 
+    <% composePostContent.forEach(e=>{ %>
+        <% if(e.title=="Nothing to show here"){ %>
+            <div class="card m-3 p-3 post-content">
+                <h3 class="card-title"><%= e.title %></h3>
+                <p class="card-text"><%= e.body %></p>
+                <a href="/compose" class="btn btn-light">GO TO COMPOSE PAGE</a>
+              </div>
+        <% }else{%>
+            <div class="card m-3 p-3 post-content">
+                <h3 class="card-title"><%= e.title %></h3>
+                <p class="card-text">
+                  <%if(e.body.length<=500){%> <%= e.body %> ...
+                  <a href="/posts/<%=e._id%>">Read more</a> <%}else{%> <%=
+                  e.body.slice(0,500) %> ... <a href="/posts/<%=e._id%>">Read more</a>
+                  <%}%>
+                </p>
+              </div>
+              <div class="container m-3 p-3 post-content">
+                <a href="/compose" class="btn btn-light btn-lg">ADD POST</a>
+              </div>
+        <%} %> 
+    <% }) %> 
+  <% }else{ %> 
+    <% composePostContent.forEach(e=>{ %>
+  <div class="card m-3 p-3 post-content">
+    <h3 class="card-title"><%= e.title %></h3>
+    <p class="card-text">
+      <%if(e.body.length<=500){%> <%= e.body %> ...
+      <a href="/posts/<%=e._id%>">Read more</a> <%}else{%> <%=
+      e.body.slice(0,500) %> ... <a href="/posts/<%=e._id%>">Read more</a>
+      <%}%>
+    </p>
+  </div>
+  <% }) %>
+  <div class="container m-3 p-3 post-content">
+    <a href="/compose" class="btn btn-light btn-lg">ADD POST</a>
+  </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer'); -%>
